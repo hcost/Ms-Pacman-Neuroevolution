@@ -36,7 +36,7 @@ def build_model(me_llamo_es, bias=False):
     model.add(tf.keras.layers.Flatten(name='flat'))
     model.add(tf.keras.layers.Dense(243, activation='relu', name='dense1', bias_initializer=bias3))
     model.add(tf.keras.layers.Dense(27, activation='relu', name='dense2', bias_initializer=bias4))
-    model.add(tf.keras.layers.Dense(9, activation='sigmoid', name="output", bias_initializer=bias5)) #Output layer
+    model.add(tf.keras.layers.Dense(5, activation='sigmoid', name="output", bias_initializer=bias5)) #Output layer
     return model
 
 def cleanState(state):
@@ -51,6 +51,7 @@ def homo_erectus(num):
     return population
 
 def get_action(action):
+    #{'n':0, 'u':1, 'd': 4, 'l':3, 'r':2, 'ul':6, 'ur':5, 'dl': 8, 'dr':7}
     try:
         action = action[0]
         action = np.where(action == np.amax(action))
@@ -70,9 +71,19 @@ def runEpisode(env, person, render):
     numSteps = 0
     done = False
     #3000?
+    last_actions = []
     while numSteps < 5000 and not done:
         action = person.predict(cleanState(state))
-        state, reward, done, info = env.step(get_action(action))
+        action = get_action(action)
+        last_actions.append(action)
+        if len(last_actions) > 16:
+            test_bool = True
+            for act in last_actions[len(last_actions)-16:]:
+                if act != action:
+                    test_bool = False
+            if test_bool:
+                totalReward -= 10
+        state, reward, done, info = env.step(action)
         if render:
             env.render()
         totalReward += reward
@@ -127,26 +138,32 @@ def mating_season(parents, individuals, survivors, gen, mutation_odds, alpha):
     kid0 = mate(parents[0], parents[1], gen, num, mutable=False)
     children.append(kid0)
     num += 1
-    kid01 = mate(parents[0], parents[1], gen, num)
+    kid01 = mate(parents[0], parents[1], gen, num, mult=1)
     children.append(kid01)
     num += 1
-    kid1 = mate(parents[2], parents[0], gen, num)
+    kid1 = mate(parents[2], parents[0], gen, num, mult=0)
     children.append(kid1)
     num += 1
-    kid2 = mate(parents[1], parents[2], gen, num)
+    kid2 = mate(parents[1], parents[2], gen, num, mult=1)
     children.append(kid2)
     num += 1
-    kid3 = mate(parents[1], parents[0], gen, num)
+    kid3 = mate(parents[1], parents[0], gen, num, mult=2)
     children.append(kid3)
     num += 1
-    kid4 = mate(parents[0], parents[2], gen, num)
+    kid4 = mate(parents[0], parents[2], gen, num, mult=1)
     children.append(kid4)
     num += 1
-    kid5 = mate(parents[2], parents[1], gen, num)
+    kid5 = mate(parents[2], parents[1], gen, num, mult=0)
     children.append(kid5)
     num += 1
-    # kid6 = mate(parents[0], build_model("rand"), gen, num, True)
-    # children.append(kid6)
+    kid6a = mate(parents[2], parents[1], gen, num, mult=2)
+    children.append(kid6a)
+    num += 1
+    kid6b = mate(parents[0], parents[0], gen, num, mult=3.5)
+    children.append(kid6b)
+    num += 1
+    # kid6c = mate(parents[0], build_model("rand"), gen, num, True)
+    # children.append(kid6c)
     # num += 1
     # kid7 = mate(parents[1], build_model("rand"), gen, num, True)
     # children.append(kid7)
@@ -166,7 +183,7 @@ def mating_season(parents, individuals, survivors, gen, mutation_odds, alpha):
         #     num += 1
     return children
 
-def mate(dad, mom, gen, num, small_odds=False, mutable=True):
+def mate(dad, mom, gen, num, small_odds=False, mutable=True, mult=0):
     layers = ["input", "conv_2", "dense1", "dense2", "output"]
     junior = build_model("gen_{}_num_{}".format(gen, num))
     for layer in layers:
@@ -186,13 +203,13 @@ def mate(dad, mom, gen, num, small_odds=False, mutable=True):
         mom_genes = mom.get_layer(layer).get_weights()
         mom_params = mom_genes[0]
         mom_bias = mom_genes[1]
-        new_weights = adult_wrestling(dad_params, mom_params, stride, conv, small_odds, mutable=mutable)
+        new_weights = adult_wrestling(dad_params, mom_params, stride, conv, small_odds, mutable=mutable, mult=mult)
         theta = dad_bias if coin_flip() else mom_bias
         mutation = (new_weights, theta)
         junior.get_layer(layer).set_weights(mutation)
     return junior
 
-def adult_wrestling(dad_genes, mom_genes, stride=1, conv=False, small_odds=False, mutable=True):
+def adult_wrestling(dad_genes, mom_genes, stride=1, conv=False, small_odds=False, mutable=True, mult=0):
     if conv:
         rng1 = len(dad_genes[0])
         rng2 = len(dad_genes[0][0])
@@ -204,7 +221,7 @@ def adult_wrestling(dad_genes, mom_genes, stride=1, conv=False, small_odds=False
                         if coin_flip():
                             dad_genes[i][j][k][l] = mom_genes[i][j][k][l]
                         if coin_flip() and mutable:
-                            dad_genes[i][j][k][l] += (2*np.random.rand()-1)/7.5
+                            dad_genes[i][j][k][l] += (2*np.random.rand()-1)/7.5*.0075*mult
     else:
         rng = len(dad_genes[0])
         for i in range(0, len(dad_genes), stride):
@@ -212,7 +229,7 @@ def adult_wrestling(dad_genes, mom_genes, stride=1, conv=False, small_odds=False
                 if coin_flip():
                     dad_genes[i][j] = mom_genes[i][j]
                 if coin_flip() and mutable:
-                    dad_genes[i][j] += (2*np.random.rand()-1)/7.5
+                    dad_genes[i][j] += (2*np.random.rand()-1)/7.5*.0075*mult
     return dad_genes
 
 
@@ -281,27 +298,27 @@ Fuse EVERYTHING, with combos and fusing with random/new model--with smaller stri
 Reevalutate scoring metric--somehow implement time survived into criteria
 """
 
-def evolve(generations=50, individuals=12, attempts=1, survivors=3, mutation_odds=5, alpha=1.5, render=False):
+def evolve(generations=75, individuals=12, attempts=1, survivors=3, mutation_odds=510, alpha=1.5, render=False):
     "Starts a new family tree <3"
-    try:
-        population = homo_erectus(individuals)
-        for gen in range(0, generations+1):
-            if gen == 12:
-                mutation_odds = 10
-                alpha = 1
-            if gen == 25:
-                alpha = 0.75
-                mutation_odds = 17
-            print("\n•••••••••••••••••••••••••••••••••••••••••••••••••••••••••••\nRunning Generation {}, {}% done\n•••••••••••••••••••••••••••••••••••••••••••••••••••••••••••\n".format(gen, int(gen/generations*100)))
-            population = run_generation(population, attempts, gen, render)
-            print("\n•••••••••••••••••••••••••••••••••••••••••••••••••••••••••••\nCreating Generation {}\n•••••••••••••••••••••••••••••••••••••••••••••••••••••••••••".format(gen+1))
-            population = survival_of_the_fittest(population, individuals, survivors, gen+1, mutation_odds, alpha)
-            if (gen+1) % 10 == 0:
-                save(population, "checkpoint_{}".format(gen+1))
-        population = run_generation(population, attempts)
-        return the_fittest(population, 1)[0], population
-    except:
-        return None, population
+# try:
+    population = homo_erectus(individuals)
+    for gen in range(0, generations+1):
+        if gen == 12:
+            mutation_odds = 10
+            alpha = 1
+        if gen == 25:
+            alpha = 0.75
+            mutation_odds = 17
+        print("\n•••••••••••••••••••••••••••••••••••••••••••••••••••••••••••\nRunning Generation {}, {}% done\n•••••••••••••••••••••••••••••••••••••••••••••••••••••••••••\n".format(gen, int(gen/generations*100)))
+        population = run_generation(population, attempts, gen, render)
+        print("\n•••••••••••••••••••••••••••••••••••••••••••••••••••••••••••\nCreating Generation {}\n•••••••••••••••••••••••••••••••••••••••••••••••••••••••••••".format(gen+1))
+        population = survival_of_the_fittest(population, individuals, survivors, gen+1, mutation_odds, alpha)
+        if (gen+1) % 10 == 0:
+            save(population, "checkpoint_{}".format(gen+1))
+    population = run_generation(population, attempts)
+    return the_fittest(population, 1)[0], population
+# except:
+#     return None, population
 
 
 

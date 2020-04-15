@@ -109,7 +109,7 @@ def birth(dna, gen, num):
 
 
 
-def evolve(generations=20, individuals=10, attempts=10, survivors=2):
+def evolve(generations=20, individuals=10, attempts=1, survivors=2):
     population = homo_erectus(individuals)
     for gen in range(1, generations+1):
         print("Generation {}".format(gen))

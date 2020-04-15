@@ -28,7 +28,7 @@ def build_model(me_llamo_es, bias=False):
         bias4 = 'zeros'
         bias5 = 'zeros'
     model = tf.keras.models.Sequential(name=me_llamo_es)
-    model.add(tf.keras.layers.Conv2D(filters=96, kernel_size=3, strides=2, input_shape=(210, 160, 3), activation='relu', name="input", bias_initializer=bias1)) #Input layer
+    model.add(tf.keras.layers.Conv2D(filters=96, kernel_size=5, strides=1, input_shape=(210, 160, 3), activation='relu', name="input", bias_initializer=bias1)) #Input layer
     model.add(tf.keras.layers.MaxPooling2D((2,2), name="pooling"))
     model.add(tf.keras.layers.BatchNormalization(name="normal_1"))
     model.add(tf.keras.layers.Conv2D(filters=128, kernel_size=3, strides=1, activation='relu', name='conv_2', bias_initializer=bias2))
@@ -70,20 +70,25 @@ def runEpisode(env, person, render):
     totalReward = 0
     numSteps = 0
     done = False
-    #3000?
     last_actions = []
+    prev_rewards = []
     while numSteps < 5000 and not done:
         action = person.predict(cleanState(state))
         action = get_action(action)
         last_actions.append(action)
-        if len(last_actions) > 16:
-            test_bool = True
-            for act in last_actions[len(last_actions)-16:]:
-                if act != action:
-                    test_bool = False
-            if test_bool:
-                totalReward -= 10
+        # if len(last_actions) > 100:
+        #     test_bool = True
+        #     for act in last_actions[len(last_actions)-99:]:
+        #         if act != action:
+        #             test_bool = False
+        #     if test_bool:
+        #         totalReward -= 150
         state, reward, done, info = env.step(action)
+        reward = 100 if reward == 10 else reward
+        prev_rewards.append(reward)
+        if numSteps > 94:
+            if not sum(prev_rewards[len(prev_rewards)-25:]):
+                totalReward -= 50
         if render:
             env.render()
         totalReward += reward
@@ -92,6 +97,7 @@ def runEpisode(env, person, render):
     return totalReward
 
 
+#TODO penalty for not improving score rather than stale action?
 
 def run_generation(population, attempts, gen, render):
     performance = {}
@@ -133,7 +139,7 @@ def survival_of_the_fittest(population, individuals, survivors, gen, mutation_od
 def mating_season(parents, individuals, survivors, gen, mutation_odds, alpha):
     children = []
     num = 0
-    num_kids = int((individuals-(2*survivors)-3)/survivors)
+    # num_kids = int((individuals-(2*survivors)-3)/survivors)
     #TODO remove assumption there are three survivors
     kid0 = mate(parents[0], parents[1], gen, num, mutable=False)
     children.append(kid0)
@@ -141,26 +147,41 @@ def mating_season(parents, individuals, survivors, gen, mutation_odds, alpha):
     kid01 = mate(parents[0], parents[1], gen, num, mult=1)
     children.append(kid01)
     num += 1
-    kid1 = mate(parents[2], parents[0], gen, num, mult=0)
-    children.append(kid1)
+    kid011 = mate(parents[0], parents[1], gen, num, mult=5)
+    children.append(kid011)
     num += 1
-    kid2 = mate(parents[1], parents[2], gen, num, mult=1)
-    children.append(kid2)
+    kid012 = mate(parents[0], parents[1], gen, num, mult=1)
+    children.append(kid012)
     num += 1
+    kid013 = mate(parents[0], parents[1], gen, num, mult=1)
+    children.append(kid013)
+    num += 1
+    # kid1 = mate(parents[2], parents[0], gen, num, mult=0)
+    # children.append(kid1)
+    # num += 1
+    # kid2 = mate(parents[1], parents[2], gen, num, mult=1)
+    # children.append(kid2)
+    # num += 1
     kid3 = mate(parents[1], parents[0], gen, num, mult=2)
     children.append(kid3)
     num += 1
-    kid4 = mate(parents[0], parents[2], gen, num, mult=1)
-    children.append(kid4)
+    kid14 = mate(parents[1], parents[0], gen, num, mult=2)
+    children.append(kid14)
     num += 1
-    kid5 = mate(parents[2], parents[1], gen, num, mult=0)
-    children.append(kid5)
-    num += 1
-    kid6a = mate(parents[2], parents[1], gen, num, mult=2)
-    children.append(kid6a)
-    num += 1
+    # kid4 = mate(parents[0], parents[2], gen, num, mult=1)
+    # children.append(kid4)
+    # num += 1
+    # kid5 = mate(parents[2], parents[1], gen, num, mult=0)
+    # children.append(kid5)
+    # num += 1
+    # kid6a = mate(parents[2], parents[1], gen, num, mult=2)
+    # children.append(kid6a)
+    # num += 1
     kid6b = mate(parents[0], parents[0], gen, num, mult=3.5)
     children.append(kid6b)
+    num += 1
+    kid6d = mate(parents[1], parents[1], gen, num, mult=3.5)
+    children.append(kid6d)
     num += 1
     # kid6c = mate(parents[0], build_model("rand"), gen, num, True)
     # children.append(kid6c)
@@ -188,7 +209,7 @@ def mate(dad, mom, gen, num, small_odds=False, mutable=True, mult=0):
     junior = build_model("gen_{}_num_{}".format(gen, num))
     for layer in layers:
         if layer == "dense1":
-            stride = np.random.randint(250, 650)
+            stride = np.random.randint(50, 500)
         elif layer == "conv_2":
             stride = np.random.randint(4, 16)
         else:
@@ -221,7 +242,7 @@ def adult_wrestling(dad_genes, mom_genes, stride=1, conv=False, small_odds=False
                         if coin_flip():
                             dad_genes[i][j][k][l] = mom_genes[i][j][k][l]
                         if coin_flip() and mutable:
-                            dad_genes[i][j][k][l] += (2*np.random.rand()-1)/7.5*.0075*mult
+                            dad_genes[i][j][k][l] += (2*np.random.rand()-1)/7.5*.025*mult
     else:
         rng = len(dad_genes[0])
         for i in range(0, len(dad_genes), stride):
@@ -229,7 +250,7 @@ def adult_wrestling(dad_genes, mom_genes, stride=1, conv=False, small_odds=False
                 if coin_flip():
                     dad_genes[i][j] = mom_genes[i][j]
                 if coin_flip() and mutable:
-                    dad_genes[i][j] += (2*np.random.rand()-1)/7.5*.0075*mult
+                    dad_genes[i][j] += (2*np.random.rand()-1)/7.5*.025*mult
     return dad_genes
 
 
@@ -291,6 +312,8 @@ def coin_flip():
 
 #INDIVIDUALS MUST BE MULTIPLE OF 3
 
+#Idea number who the fuck knows to prevent stuckness maybe look at rate of change/number of consecutive turns with score of 0
+
 """
 IDEAS:
 Remove random in choosing action, see if can then run single attempt
@@ -298,31 +321,32 @@ Fuse EVERYTHING, with combos and fusing with random/new model--with smaller stri
 Reevalutate scoring metric--somehow implement time survived into criteria
 """
 
-def evolve(generations=75, individuals=12, attempts=1, survivors=3, mutation_odds=510, alpha=1.5, render=False):
+def evolve(generations=200, individuals=12, attempts=1, survivors=2, mutation_odds=15, alpha=2, render=False):
     "Starts a new family tree <3"
-# try:
-    population = homo_erectus(individuals)
-    for gen in range(0, generations+1):
-        if gen == 12:
-            mutation_odds = 10
-            alpha = 1
-        if gen == 25:
-            alpha = 0.75
-            mutation_odds = 17
-        print("\n•••••••••••••••••••••••••••••••••••••••••••••••••••••••••••\nRunning Generation {}, {}% done\n•••••••••••••••••••••••••••••••••••••••••••••••••••••••••••\n".format(gen, int(gen/generations*100)))
-        population = run_generation(population, attempts, gen, render)
-        print("\n•••••••••••••••••••••••••••••••••••••••••••••••••••••••••••\nCreating Generation {}\n•••••••••••••••••••••••••••••••••••••••••••••••••••••••••••".format(gen+1))
-        population = survival_of_the_fittest(population, individuals, survivors, gen+1, mutation_odds, alpha)
-        if (gen+1) % 10 == 0:
-            save(population, "checkpoint_{}".format(gen+1))
-    population = run_generation(population, attempts)
-    return the_fittest(population, 1)[0], population
-# except:
-#     return None, population
+    try:
+        population = homo_erectus(individuals)
+        for gen in range(0, generations+1):
+            if gen == 25:
+                mutation_odds = 10
+                alpha = 1.75
+                attempts = 3
+            # if gen == 25:
+            #     alpha = 0.75
+            #     mutation_odds = 17
+            print("\n•••••••••••••••••••••••••••••••••••••••••••••••••••••••••••\nRunning Generation {}, {}% done\n•••••••••••••••••••••••••••••••••••••••••••••••••••••••••••\n".format(gen, int(gen/generations*100)))
+            population = run_generation(population, attempts, gen, render)
+            print("\n•••••••••••••••••••••••••••••••••••••••••••••••••••••••••••\nCreating Generation {}\n•••••••••••••••••••••••••••••••••••••••••••••••••••••••••••".format(gen+1))
+            population = survival_of_the_fittest(population, individuals, survivors, gen+1, mutation_odds, alpha)
+            if (gen+1) % 5 == 0:
+                save(population, "checkpoint_{}".format(gen+1))
+        population = run_generation(population, attempts)
+        return the_fittest(population, 1)[0], population
+    except:
+        return None, population
 
 
 
-def cont(population, curr_generations=50, generations=300, attempts=1, survivors=3, mutation_odds=10, alpha=2, render=False, individuals=12):
+def cont(population, curr_generations=50, generations=400, attempts=1, survivors=2, mutation_odds=15, alpha=2, render=False, individuals=12):
     "Continues a family tree <3"
     try:
         for gen in range(curr_generations, generations+1):
@@ -336,7 +360,7 @@ def cont(population, curr_generations=50, generations=300, attempts=1, survivors
             population = run_generation(population, attempts, gen, render)
             print("\n•••••••••••••••••••••••••••••••••••••••••••••••••••••••••••\nCreating Generation {}\n•••••••••••••••••••••••••••••••••••••••••••••••••••••••••••".format(gen+1))
             population = survival_of_the_fittest(population, individuals, survivors, gen+1, mutation_odds, alpha)
-            if (gen+1) % 10 == 0:
+            if (gen+1) % 5 == 0:
                 save(population, "checkpoint_{}".format(gen+1))
         population = run_generation(population, attempts)
         return the_fittest(population, 1)[0], population

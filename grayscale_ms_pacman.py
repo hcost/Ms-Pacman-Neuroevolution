@@ -25,7 +25,7 @@ def cleanState(state):
     state = Image.fromarray(state)
     state = state.convert('L')
     state = np.asarray(state)
-    return np.reshape(state, [1, 210, 160])
+    return np.reshape(state, [1, 210, 160, 1])
 
 def generate_inital_pop():
     num = params['individuals']
@@ -114,39 +114,39 @@ def mutate(junior):
     severity = params["severity"]
     extreme_odds = params["extreme_odds"]
     for layer in params["conv_layers"]:
-        weights = junior.get_layer('layer').get_weights()
+        weights = junior.get_layer(layer).get_weights()
         bias = weights[1]
         weights = weights[0]
         rng1, rng2, rng3, rng4 = weights.shape
         for i in range(rng1):
             for j in range(rng2):
                 for k in range(rng3):
-                    for l in range(0, rng4, np.randint(3)):
+                    for l in range(0, rng4, np.random.randint(1,3)):
                         if event(extreme_odds):
-                            weights[i][j][k][l] += (-1)**coin_flip * 1/np.random.randint(11)
+                            weights[i][j][k][l] += (-1)**coin_flip() * 1/np.random.randint(1,11)
                         elif event(odds):
-                            weights[i][j][k][l] += (-1)**coin_flip * np.random.uniform() * severity
+                            weights[i][j][k][l] += (-1)**coin_flip() * np.random.uniform() * severity
         for i in range(len(bias)):
             if event(odds):
-                bias[i] += (-1)**coin_flip * np.random.uniform() * severity
+                bias[i] += (-1)**coin_flip() * np.random.uniform() * severity
         weights = [weights, bias]
-        junior.get_layer('layer').set_weights(weights)
+        junior.get_layer(layer).set_weights(weights)
     for layer in params["flat_layers"]:
-        weights = junior.get_layer('layer').get_weights()
+        weights = junior.get_layer(layer).get_weights()
         bias = weights[1]
         weights = weights[0]
         rng1, rng2 = weights.shape
-        for i in range(0, rng1, np.randint(rng1//5)):
+        for i in range(0, rng1, np.random.randint(1,rng1//5)):
             for j in range(rng2):
                 if event(extreme_odds):
-                    weights[i][j] += (-1)**coin_flip * 1/np.random.randint(11)
+                    weights[i][j] += (-1)**coin_flip() * 1/np.random.randint(1,11)
                 elif event(odds):
-                    weights[i][j] += (-1)**coin_flip * np.random.uniform() * severity
+                    weights[i][j] += (-1)**coin_flip() * np.random.uniform() * severity
         for i in range(len(bias)):
             if event(odds):
-                bias[i] += (-1)**coin_flip * np.random.uniform() * severity
+                bias[i] += (-1)**coin_flip() * np.random.uniform() * severity
         weights = [weights, bias]
-        junior.get_layer('layer').set_weights(weights)
+        junior.get_layer(layer).set_weights(weights)
 
 
 
@@ -164,11 +164,11 @@ params = {
     "conv_layers" : ["input", "conv_2", "conv_3"],
     "flat_layers" : ["dense1", "output"],
     "generations" : 200,
-    "individuals" : 12,
+    "individuals" : 15,
     "attempts" : 1,
-    "survivors" : 2,
+    "survivors" : 3,
     "odds" : 65, #percent chance of a mutation
-    "severity" : 1e-1, #scales mutations; if set to 1 mutations are uniform from [0,1]
+    "severity" : 1e-1, #scales mutations; if set to 1 mutations are uniform from [-1,1]
     "extreme_odds" : 5 #percent chance of an extreme mutation
 }
 
@@ -178,7 +178,7 @@ def evolve(render=False):
     try:
         population = generate_inital_pop()
         for gen in range(0, params["generations"]+1):
-            print("\n•••••••••••••••••••••••••••••••••••••••••••••••••••••••••••\nRunning Generation {}, {}% done\n•••••••••••••••••••••••••••••••••••••••••••••••••••••••••••\n".format(gen, int(gen/generations*100)))
+            print("\n•••••••••••••••••••••••••••••••••••••••••••••••••••••••••••\nRunning Generation {}, {}% done\n•••••••••••••••••••••••••••••••••••••••••••••••••••••••••••\n".format(gen, int(gen/params['generations']*100)))
             population = run_generation(population, gen, render)
             print("\n•••••••••••••••••••••••••••••••••••••••••••••••••••••••••••\nCreating Generation {}\n•••••••••••••••••••••••••••••••••••••••••••••••••••••••••••".format(gen+1))
             population = survival_of_the_fittest(population, gen+1)
@@ -193,7 +193,7 @@ def cont(population, curr_generations, render=False):
     "Continues a family tree <3"
     try:
         for gen in range(curr_generations, params["generations"]+1):
-            print("\n•••••••••••••••••••••••••••••••••••••••••••••••••••••••••••\nRunning Generation {}, {}% done\n•••••••••••••••••••••••••••••••••••••••••••••••••••••••••••\n".format(gen, int(gen/generations*100)))
+            print("\n•••••••••••••••••••••••••••••••••••••••••••••••••••••••••••\nRunning Generation {}, {}% done\n•••••••••••••••••••••••••••••••••••••••••••••••••••••••••••\n".format(gen, int(gen/params['generations']*100)))
             population = run_generation(population, gen, render)
             print("\n•••••••••••••••••••••••••••••••••••••••••••••••••••••••••••\nCreating Generation {}\n•••••••••••••••••••••••••••••••••••••••••••••••••••••••••••".format(gen+1))
             population = survival_of_the_fittest(population, gen+1)
@@ -239,7 +239,7 @@ def coin_flip():
     return np.random.randint(2)
 
 def event(thresh):
-    return np.random.randint(101) < thresh
+    return np.random.randint(1,101) < thresh
 
 def copy_model(model_source, model_target, certain_layer=""):
     for target_layers, source_layers in zip(model_target.layers, model_source.layers):

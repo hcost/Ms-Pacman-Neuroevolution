@@ -28,14 +28,15 @@ def build_model(me_llamo_es, bias=False):
         bias4 = 'zeros'
         bias5 = 'zeros'
     model = tf.keras.models.Sequential(name=me_llamo_es)
-    model.add(tf.keras.layers.Conv2D(filters=96, kernel_size=5, strides=1, input_shape=(210, 160, 3), activation='relu', name="input", bias_initializer=bias1)) #Input layer
-    model.add(tf.keras.layers.MaxPooling2D((2,2), name="pooling"))
+    model.add(tf.keras.layers.Conv2D(filters=96, kernel_size=3, strides=1, input_shape=(210, 160, 3), activation='relu', name="input", bias_initializer=bias1)) #Input layer
+    # model.add(tf.keras.layers.MaxPooling2D((2,2), name="pooling"))
     model.add(tf.keras.layers.BatchNormalization(name="normal_1"))
-    model.add(tf.keras.layers.Conv2D(filters=128, kernel_size=3, strides=1, activation='relu', name='conv_2', bias_initializer=bias2))
-    model.add(tf.keras.layers.BatchNormalization(name='normal_2'))
+    model.add(tf.keras.layers.Conv2D(filters=128, kernel_size=5, strides=2, activation='relu', name='conv_2', bias_initializer=bias2))
+    # model.add(tf.keras.layers.BatchNormalization(name='normal_2'))
+    model.add(tf.keras.layers.Conv2D(filters=256, kernel_size=7, strides=3, activation='relu', name='conv_3', bias_initializer=bias2))
     model.add(tf.keras.layers.Flatten(name='flat'))
-    model.add(tf.keras.layers.Dense(243, activation='relu', name='dense1', bias_initializer=bias3))
-    model.add(tf.keras.layers.Dense(27, activation='relu', name='dense2', bias_initializer=bias4))
+    model.add(tf.keras.layers.Dense(50, activation='relu', name='dense1', bias_initializer=bias3))
+    # model.add(tf.keras.layers.Dense(27, activation='relu', name='dense2', bias_initializer=bias4))
     model.add(tf.keras.layers.Dense(5, activation='sigmoid', name="output", bias_initializer=bias5)) #Output layer
     return model
 
@@ -75,7 +76,7 @@ def runEpisode(env, person, render):
     while numSteps < 5000 and not done:
         action = person.predict(cleanState(state))
         action = get_action(action)
-        last_actions.append(action)
+        # last_actions.append(action)
         # if len(last_actions) > 100:
         #     test_bool = True
         #     for act in last_actions[len(last_actions)-99:]:
@@ -84,11 +85,12 @@ def runEpisode(env, person, render):
         #     if test_bool:
         #         totalReward -= 150
         state, reward, done, info = env.step(action)
-        reward = 100 if reward == 10 else reward
-        prev_rewards.append(reward)
-        if numSteps > 94:
-            if not sum(prev_rewards[len(prev_rewards)-25:]):
-                totalReward -= 50
+        # reward = 100 if reward == 10 else reward
+        reward = 0 if reward > 10 else reward
+        # prev_rewards.append(reward)
+        # if numSteps > 94:
+        #     if not sum(prev_rewards[len(prev_rewards)-25:]):
+        #         totalReward -= 50
         if render:
             env.render()
         totalReward += reward

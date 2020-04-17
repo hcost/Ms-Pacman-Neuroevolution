@@ -7,27 +7,46 @@ from statistics import mean
 import datetime
 from time import process_time
 from PIL import Image
+from collections import Counter
 
 """2D CNN neuroevolution for Ms Pacman, now with less colors!"""
 
 
-#TODO implement "peak ahead extra image channels"
-def build_model(name):
+def build_model(name="bob"):
+    #bigger model size--gen116 architecture
+    # model = tf.keras.models.Sequential(name=name)
+    # model.add(tf.keras.layers.Conv2D(filters=6, kernel_size=3, strides=1, input_shape=(210, 160, 4), activation='relu', name="input")) #Input layer
+    # model.add(tf.keras.layers.Conv2D(filters=9, kernel_size=3, strides=1, activation='relu', name='conv_2'))
+    # model.add(tf.keras.layers.Conv2D(filters=3, kernel_size=3, strides=5, activation='relu', name='conv_3'))
+    # model.add(tf.keras.layers.Flatten(name='flat'))
+    # model.add(tf.keras.layers.Dense(10, activation='sigmoid', name='dense1'))
+    # model.add(tf.keras.layers.Dense(4, activation='softmax', name="output")) #Output layer
+
+
+    #smaller arch size--experimental/current
     model = tf.keras.models.Sequential(name=name)
-    model.add(tf.keras.layers.Conv2D(filters=7, kernel_size=3, strides=1, input_shape=(210, 160, 1), activation='relu', name="input")) #Input layer
-    model.add(tf.keras.layers.BatchNormalization(name="norm"))
-    model.add(tf.keras.layers.Conv2D(filters=9, kernel_size=5, strides=2, activation='relu', name='conv_2'))
-    model.add(tf.keras.layers.Conv2D(filters=13, kernel_size=7, strides=3, activation='relu', name='conv_3'))
+    model.add(tf.keras.layers.Conv2D(filters=6, kernel_size=3, strides=1, input_shape=(210, 160, 4), activation='relu', name="input")) #Input layer
+    model.add(tf.keras.layers.Conv2D(filters=3, kernel_size=3, strides=5, activation='relu', name='conv_2'))
+    model.add(tf.keras.layers.Conv2D(filters=1, kernel_size=3, strides=3, activation='relu', name='conv_3'))
     model.add(tf.keras.layers.Flatten(name='flat'))
-    model.add(tf.keras.layers.Dense(25, activation='sigmoid', name='dense1'))
-    model.add(tf.keras.layers.Dense(5, activation='softmax', name="output")) #Output layer
+    model.add(tf.keras.layers.Dense(10, activation='sigmoid', name='dense1'))
+    model.add(tf.keras.layers.Dense(4, activation='softmax', name="output")) #Output layer
     return model
 
-def cleanState(state):
-    state = Image.fromarray(state)
-    state = state.convert('L')
-    state = np.asarray(state)
-    return np.reshape(state, [1, 210, 160, 1])
+
+def cleanStates(states):
+    bigState = np.dstack((states[0], states[1], states[2], states[3]))
+    cleaned = []
+    for i in range(4):
+        state = states[i]
+        state = Image.fromarray(state)
+        state = state.convert('L')
+        state = np.asarray(state)
+        state = np.reshape(state, [1, 210, 160])
+        cleaned.append(state)
+    bigState = np.stack((cleaned[0], cleaned[1], cleaned[2], cleaned[3]), axis=-1)
+    return bigState
+
 
 def generate_inital_pop():
     num = params['individuals']
@@ -51,26 +70,49 @@ def get_action(action):
 
 def runEpisode(env, person, render):
     state = env.reset()
+    states = []
+    states.append(state)
+    emphasis = params["emphasis"]
+    for i in range(2):
+        state, reward, done, info = env.step(0)
+        states.append(state)
+    state, reward, done, info = env.step(1)
+    states.append(state)
     if render:
         env.render()
     totalReward = 0
     numSteps = 0
+    score = 0
     done = False
-    start_time = process_time()
+    prev_lives = info['ale.lives']
+    actions = []
     while numSteps < 5000 and not done:
-        action = person.predict(cleanState(state))
+        action = person.predict(cleanStates(states))
         action = get_action(action)
-        state, reward, done, info = env.step(action)
-        reward = 0.2 * reward if reward > 10 else reward
-        if render:
-            env.render()
-        totalReward += reward
+        states = []
+        actions.append(action)
+        #death reset
+        if info['ale.lives'] != prev_lives or numSteps % 100 == 0:
+            prev_lives = info['ale.lives']
+            state, reward, done, info = env.step(1)
+        else:
+            prev_lives = info['ale.lives']
+        for i in range(4):
+            state, reward, done, info = env.step(action)
+            states.append(state)
+            if render:
+                env.render()
+            score += reward
+            if score*reward >= params["emphasis_threshold"]:
+                emphasis *= 1.1
+            totalReward += reward*score**emphasis
+        tally = Counter(actions)
+        zero, two, three = tally.get(0, 0), tally.get(2, 0), tally.get(3, 0)
+        variety = -1*max(abs(zero-two), abs(two-three), abs(three-zero))
         numSteps += 1
-    total_time = process_time() - start_time
-    #TODO maybe make reward reward*rew/sec as an efficiency weight
-    newReward = totalReward/total_time
-    print(newReward)
-    return newReward
+    netReward = totalReward + variety*params["alpha"]
+    print("Score: {}, Reward {}".format(score, netReward))
+    return netReward
 
 def run_generation(population, gen, render):
     performance = {}
@@ -79,12 +121,13 @@ def run_generation(population, gen, render):
     avgReward = []
     for person in population:
         count += 1
-        print("\nIndividual {} out of {} ({}%)\n{}\nScores:".format(count, len(population), int(count/len(population)*100), person.name))
+        print("\nIndividual {} out of {} ({}%)\n{}".format(count, len(population), int(count/len(population)*100), person.name))
         rewards = []
         for i in range(attempts):
             rewards.append(runEpisode(env, person, render))
         reward = sum(rewards)/attempts
-        print("Average reward of {}".format(reward))
+        if attempts > 1:
+            print("Average reward of {}".format(reward))
         performance[person] = reward
         avgReward.append(reward)
     avgReward = sum(avgReward)/len(avgReward)
@@ -136,7 +179,7 @@ def mutate(junior):
         for i in range(rng1):
             for j in range(rng2):
                 for k in range(rng3):
-                    for l in range(0, rng4, np.random.randint(1,6)):
+                    for l in range(rng4):
                         if event(odds):
                             weights[i][j][k][l] += (-1)**coin_flip() * np.random.uniform() * severity
         for i in range(len(bias)):
@@ -149,7 +192,7 @@ def mutate(junior):
         bias = weights[1]
         weights = weights[0]
         rng1, rng2 = weights.shape
-        for i in range(0, rng1, np.random.randint(1,rng1//5+1)):
+        for i in range(rng1):
             for j in range(rng2):
                 if event(odds):
                     weights[i][j] += (-1)**coin_flip() * np.random.uniform() * severity
@@ -175,12 +218,31 @@ params = {
     "conv_layers" : ["input", "conv_2", "conv_3"],
     "flat_layers" : ["dense1", "output"],
     "generations" : 300,
-    "individuals" : 10,
-    "attempts" : 3,
-    "survivors" : 2,
+    "individuals" : 12,
+    "attempts" : 4,
+    "survivors" : 3,
+    "alpha" : 3, #modifier on variety added to reward after run; 0 to use default reward
+    "emphasis" : 5, #modifier on actual score
+    "emphasis_threshold" : 2,#when to start applying emphasis
     "odds" : 65, #percent chance of a mutation
-    "severity" : 1e-2, #scales mutations; if set to 1 mutations are uniform from [-1,1]
+    "severity" : 1e-3, #scales mutations; if set to 1 mutations are uniform from [-1,1]
     "extreme_odds" : 10, #percent chance of an extreme mutation
+    "extreme_severity" : 7.5e-2, #severity if an extreme mutation occurs
+    "switch" : None, #when to switch to new params
+    "switched" : ["individuals", "attempts", "survivors", "alpha", "emphasis", "emphasis_threshold", "odds", "severity", "extreme_odds", "extreme_severity"] #params to switch
+}
+
+#params for later generations
+switch = {
+    "individuals" : 12,
+    "attempts" : 3,
+    "survivors" : 3,
+    "alpha" : 1, #modifier on variety added to reward after run; 0 to use default reward
+    "emphasis" : 5, #modifier on score
+    "emphasis_threshold" : 3, #when to start applying emphasis
+    "odds" : 60, #percent chance of a mutation
+    "severity" : 1e-3, #scales mutations; if set to 1 mutations are uniform from [-1,1]
+    "extreme_odds" : 7, #percent chance of an extreme mutation
     "extreme_severity" : 1e-1 #severity if an extreme mutation occurs
 }
 
@@ -196,6 +258,9 @@ def evolve(render=False):
             population = survival_of_the_fittest(population, gen+1)
             if (gen+1) % 10 == 0:
                 save(population, "checkpoint_{}".format(gen+1))
+            if gen == params["switch"]:
+                for param in params["switched"]:
+                    params[param] = switch[param]
         population = run_generation(population, gen, render)
         return the_fittest(population)[0], population
     except KeyboardInterrupt:
@@ -225,7 +290,7 @@ def cont(population, curr_generations, render=False):
 #utility functions
 def save(models, file_name):
     #Dont use a try block like that fix
-    fp = "/Users/harrison/gamerAI/models"
+    fp = "/Users/harrison/gamerAI/breakout_models"
     event = "/"+file_name+"/"
     fp += event
     try:
@@ -241,10 +306,10 @@ def save(models, file_name):
 def load(file_name, models=1):
     model_list = []
     if models == 1:
-        model_list.append(tf.keras.models.load_model("/Users/harrison/gamerAI/models/"+file_name+"/model.tf"))
+        model_list.append(tf.keras.models.load_model("/Users/harrison/gamerAI/breakout_models/"+file_name+"/model.tf"))
     else:
         for i in range(models):
-            model_list.append(tf.keras.models.load_model("/Users/harrison/gamerAI/models/"+file_name+"/model_{}.tf".format(i)))
+            model_list.append(tf.keras.models.load_model("/Users/harrison/gamerAI/breakout_models/"+file_name+"/model_{}.tf".format(i)))
     return model_list
 
 def coin_flip():
@@ -265,7 +330,7 @@ def copy_model(model_source, model_target, certain_layer=""):
 
 
 # main
-env = gym.make('MsPacman-v0')
+env = gym.make('Breakout-v0')
 wkday = datetime.datetime.today().strftime('%A')
 purpose = input("\nHello Harrison. Hope you're having a nice {}.\nAre you starting a new instance (n), continuing an old one (c), or debugging (d)?\n".format(wkday))
 render = input("\nWould you like to see the action? (y or n)\n")

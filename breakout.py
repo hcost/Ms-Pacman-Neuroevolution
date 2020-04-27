@@ -103,14 +103,12 @@ def runEpisode(env, person, render):
             if render:
                 env.render()
             score += reward
-            if score*reward >= params["emphasis_threshold"]:
-                emphasis *= 1.1
-            totalReward += reward*score**emphasis
-        tally = Counter(actions)
-        zero, two, three = tally.get(0, 0), tally.get(2, 0), tally.get(3, 0)
-        variety = -1*max(abs(zero-two), abs(two-three), abs(three-zero))
+            totalReward += reward*emphasis**score
         numSteps += 1
-    netReward = totalReward + variety*params["alpha"]
+    tally = Counter(actions)
+    zero, two, three = tally.get(0, 0), tally.get(2, 0), tally.get(3, 0)
+    variety = -1*max(abs(zero-two), abs(two-three), abs(three-zero))
+    netReward = -1000 if score < 2 else totalReward + variety*params["alpha"]
     print("Score: {}, Reward {}".format(score, netReward))
     return netReward
 
@@ -217,17 +215,17 @@ params = {
     #need individuals-survivors)/survivors to be an int
     "conv_layers" : ["input", "conv_2", "conv_3"],
     "flat_layers" : ["dense1", "output"],
-    "generations" : 300,
+    "generations" : 3000,
     "individuals" : 12,
-    "attempts" : 4,
+    "attempts" : 5,
     "survivors" : 3,
-    "alpha" : 3, #modifier on variety added to reward after run; 0 to use default reward
-    "emphasis" : 5, #modifier on actual score
-    "emphasis_threshold" : 2,#when to start applying emphasis
-    "odds" : 65, #percent chance of a mutation
+    "alpha" : .5, #modifier on variety added to reward after run; 0 to use default reward
+    "emphasis" : 3.5, #modifier on actual score
+    "emphasis_threshold" : 3,#when to start applying emphasis
+    "odds" : 50, #percent chance of a mutation
     "severity" : 1e-3, #scales mutations; if set to 1 mutations are uniform from [-1,1]
     "extreme_odds" : 10, #percent chance of an extreme mutation
-    "extreme_severity" : 7.5e-2, #severity if an extreme mutation occurs
+    "extreme_severity" : 1e-1, #severity if an extreme mutation occurs
     "switch" : None, #when to switch to new params
     "switched" : ["individuals", "attempts", "survivors", "alpha", "emphasis", "emphasis_threshold", "odds", "severity", "extreme_odds", "extreme_severity"] #params to switch
 }
@@ -290,8 +288,8 @@ def cont(population, curr_generations, render=False):
 #utility functions
 def save(models, file_name):
     #Dont use a try block like that fix
-    fp = "/Users/harrison/gamerAI/breakout_models"
-    event = "/"+file_name+"/"
+    fp = "/Users/harrison/gamerAI/breakout_models/"
+    event = file_name+"/"
     fp += event
     try:
         i = 0

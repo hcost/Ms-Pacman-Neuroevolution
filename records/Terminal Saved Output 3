@@ -1,0 +1,2141 @@
+Last login: Tue Jan 28 16:58:56 on ttys005
+harrison@Harrisons-MBP-4 ~ $ cd gamerAI                         [ruby-2.6.3p62]
+harrison@Harrisons-MBP-4 ~/gamerAI $ python ms_pacman_neuro_evolve.py
+
+Hello Harrison. Hope you're having a nice Wednesday.
+Are you starting a new instance (n), continuing an old one (c), or debugging (d)?
+c
+
+Would you like to see the action? (y or n)
+n
+
+Name of directory of models: checkpoint_40
+
+How many models are being loaded? 14
+
+What generation is this? 140
+
+Let there be even more life!
+
+Traceback (most recent call last):
+  File "ms_pacman_neuro_evolve.py", line 376, in <module>
+    population = load(fp, num)
+  File "ms_pacman_neuro_evolve.py", line 345, in load
+    model_list.append(tf.keras.models.load_model("/Users/harrison/gamerAI/models/"+file_name+"/model_{}.tf".format(i)))
+  File "/usr/local/lib/python3.7/site-packages/tensorflow_core/python/keras/saving/save.py", line 149, in load_model
+    loader_impl.parse_saved_model(filepath)
+  File "/usr/local/lib/python3.7/site-packages/tensorflow_core/python/saved_model/loader_impl.py", line 83, in parse_saved_model
+    constants.SAVED_MODEL_FILENAME_PB))
+OSError: SavedModel file does not exist at: /Users/harrison/gamerAI/models/checkpoint_40/model_0.tf/{saved_model.pbtxt|saved_model.pb}
+harrison@Harrisons-MBP-4 ~/gamerAI $ python ms_pacman_neuro_evolve.py
+
+Hello Harrison. Hope you're having a nice Wednesday.
+Are you starting a new instance (n), continuing an old one (c), or debugging (d)?
+c
+
+Would you like to see the action? (y or n)
+n
+
+Name of directory of models: checkpoint_140
+
+How many models are being loaded? 14
+
+What generation is this? 140
+
+Let there be even more life!
+
+2020-01-29 12:37:14.683766: I tensorflow/core/platform/cpu_feature_guard.cc:142] Your CPU supports instructions that this TensorFlow binary was not compiled to use: AVX2 FMA
+2020-01-29 12:37:14.694813: I tensorflow/compiler/xla/service/service.cc:168] XLA service 0x7fb53abb8c20 initialized for platform Host (this does not guarantee that XLA will be used). Devices:
+2020-01-29 12:37:14.694831: I tensorflow/compiler/xla/service/service.cc:176]   StreamExecutor device (0): Host, Default Version
+
+•••••••••••••••••••••••••••••••••••••••••••••••••••••••••••
+Running Generation 140, 70% done
+•••••••••••••••••••••••••••••••••••••••••••••••••••••••••••
+
+
+Individual 1 out of 14 (7%)
+gen_137_num_2
+Scores:
+950.0
+
+Individual 2 out of 14 (14%)
+gen_132_num_0
+Scores:
+^C
+Early termination
+
+Save models? (y or n) n
+harrison@Harrisons-MBP-4 ~/gamerAI $ python ms_pacman_neuro_evolve.py
+
+Hello Harrison. Hope you're having a nice Wednesday.
+Are you starting a new instance (n), continuing an old one (c), or debugging (d)?
+c
+
+Would you like to see the action? (y or n)
+n
+
+Name of directory of models: checkpoint_140
+
+How many models are being loaded? 14  
+
+What generation is this? 140
+
+Let there be even more life!
+
+2020-01-29 12:38:51.737539: I tensorflow/core/platform/cpu_feature_guard.cc:142] Your CPU supports instructions that this TensorFlow binary was not compiled to use: AVX2 FMA
+2020-01-29 12:38:51.756015: I tensorflow/compiler/xla/service/service.cc:168] XLA service 0x7fcdb9a74090 initialized for platform Host (this does not guarantee that XLA will be used). Devices:
+2020-01-29 12:38:51.756037: I tensorflow/compiler/xla/service/service.cc:176]   StreamExecutor device (0): Host, Default Version
+
+•••••••••••••••••••••••••••••••••••••••••••••••••••••••••••
+Running Generation 140, 70% done
+•••••••••••••••••••••••••••••••••••••••••••••••••••••••••••
+
+
+Individual 1 out of 14 (7%)
+gen_137_num_2
+Scores:
+950.0
+970.0
+350.0
+
+Individual 2 out of 14 (14%)
+gen_132_num_0
+Scores:
+970.0
+980.0
+970.0
+
+Individual 3 out of 14 (21%)
+gen_139_num_1
+Scores:
+970.0
+580.0
+970.0
+
+Individual 4 out of 14 (28%)
+gen_140_num_0
+Scores:
+590.0
+590.0
+970.0
+
+Individual 5 out of 14 (35%)
+gen_140_num_1
+Scores:
+980.0
+570.0
+360.0
+
+Individual 6 out of 14 (42%)
+gen_140_num_2
+Scores:
+570.0
+970.0
+370.0
+
+Individual 7 out of 14 (50%)
+gen_140_num_3
+Scores:
+100.0
+390.0
+1060.0
+
+Individual 8 out of 14 (57%)
+gen_140_num_4
+Scores:
+1800.0
+570.0
+260.0
+
+Individual 9 out of 14 (64%)
+gen_140_num_5
+Scores:
+970.0
+970.0
+570.0
+
+Individual 10 out of 14 (71%)
+gen_140_num_6
+Scores:
+220.0
+300.0
+220.0
+
+Individual 11 out of 14 (78%)
+gen_140_num_7
+Scores:
+210.0
+210.0
+210.0
+
+Individual 12 out of 14 (85%)
+gen_140_num_8
+Scores:
+210.0
+210.0
+210.0
+
+Individual 13 out of 14 (92%)
+gen_120_num_0
+Scores:
+500.0
+400.0
+620.0
+
+Individual 14 out of 14 (100%)
+gen_120_num_7
+Scores:
+310.0
+480.0
+270.0
+
+•••••••••••••••••••••••••••••••••••••••••••••••••••••••••••
+Creating Generation 141
+•••••••••••••••••••••••••••••••••••••••••••••••••••••••••••
+
+•••••••••••••••••••••••••••••••••••••••••••••••••••••••••••
+Running Generation 141, 70% done
+•••••••••••••••••••••••••••••••••••••••••••••••••••••••••••
+
+
+Individual 1 out of 12 (8%)
+gen_132_num_0
+Scores:
+980.0
+980.0
+300.0
+
+Individual 2 out of 12 (16%)
+gen_140_num_4
+Scores:
+170.0
+420.0
+250.0
+
+Individual 3 out of 12 (25%)
+gen_139_num_1
+Scores:
+970.0
+310.0
+230.0
+
+Individual 4 out of 12 (33%)
+gen_141_num_0
+Scores:
+340.0
+570.0
+980.0
+
+Individual 5 out of 12 (41%)
+gen_141_num_1
+Scores:
+570.0
+570.0
+570.0
+
+Individual 6 out of 12 (50%)
+gen_141_num_2
+Scores:
+130.0
+200.0
+90.0
+
+Individual 7 out of 12 (58%)
+gen_141_num_3
+Scores:
+180.0
+170.0
+130.0
+
+Individual 8 out of 12 (66%)
+gen_141_num_4
+Scores:
+890.0
+350.0
+560.0
+
+Individual 9 out of 12 (75%)
+gen_141_num_5
+Scores:
+70.0
+70.0
+70.0
+
+Individual 10 out of 12 (83%)
+gen_141_num_6
+Scores:
+60.0
+60.0
+60.0
+
+Individual 11 out of 12 (91%)
+gen_141_num_7
+Scores:
+210.0
+210.0
+210.0
+
+Individual 12 out of 12 (100%)
+gen_141_num_8
+Scores:
+120.0
+120.0
+120.0
+
+•••••••••••••••••••••••••••••••••••••••••••••••••••••••••••
+Creating Generation 142
+•••••••••••••••••••••••••••••••••••••••••••••••••••••••••••
+
+•••••••••••••••••••••••••••••••••••••••••••••••••••••••••••
+Running Generation 142, 71% done
+•••••••••••••••••••••••••••••••••••••••••••••••••••••••••••
+
+
+Individual 1 out of 12 (8%)
+gen_132_num_0
+Scores:
+950.0
+960.0
+530.0
+
+Individual 2 out of 12 (16%)
+gen_141_num_0
+Scores:
+360.0
+230.0
+970.0
+
+Individual 3 out of 12 (25%)
+gen_141_num_1
+Scores:
+970.0
+580.0
+980.0
+
+Individual 4 out of 12 (33%)
+gen_142_num_0
+Scores:
+930.0
+200.0
+930.0
+
+Individual 5 out of 12 (41%)
+gen_142_num_1
+Scores:
+990.0
+570.0
+970.0
+
+Individual 6 out of 12 (50%)
+gen_142_num_2
+Scores:
+970.0
+230.0
+330.0
+
+Individual 7 out of 12 (58%)
+gen_142_num_3
+Scores:
+120.0
+120.0
+120.0
+
+Individual 8 out of 12 (66%)
+gen_142_num_4
+Scores:
+400.0
+270.0
+260.0
+
+Individual 9 out of 12 (75%)
+gen_142_num_5
+Scores:
+160.0
+420.0
+270.0
+
+Individual 10 out of 12 (83%)
+gen_142_num_6
+Scores:
+970.0
+970.0
+230.0
+
+Individual 11 out of 12 (91%)
+gen_142_num_7
+Scores:
+210.0
+330.0
+320.0
+
+Individual 12 out of 12 (100%)
+gen_142_num_8
+Scores:
+210.0
+210.0
+210.0
+
+•••••••••••••••••••••••••••••••••••••••••••••••••••••••••••
+Creating Generation 143
+•••••••••••••••••••••••••••••••••••••••••••••••••••••••••••
+
+•••••••••••••••••••••••••••••••••••••••••••••••••••••••••••
+Running Generation 143, 71% done
+•••••••••••••••••••••••••••••••••••••••••••••••••••••••••••
+
+
+Individual 1 out of 12 (8%)
+gen_141_num_1
+Scores:
+620.0
+980.0
+970.0
+
+Individual 2 out of 12 (16%)
+gen_142_num_1
+Scores:
+960.0
+960.0
+570.0
+
+Individual 3 out of 12 (25%)
+gen_142_num_6
+Scores:
+390.0
+530.0
+970.0
+
+Individual 4 out of 12 (33%)
+gen_143_num_0
+Scores:
+570.0
+940.0
+950.0
+
+Individual 5 out of 12 (41%)
+gen_143_num_1
+Scores:
+220.0
+300.0
+300.0
+
+Individual 6 out of 12 (50%)
+gen_143_num_2
+Scores:
+210.0
+210.0
+210.0
+
+Individual 7 out of 12 (58%)
+gen_143_num_3
+Scores:
+370.0
+220.0
+270.0
+
+Individual 8 out of 12 (66%)
+gen_143_num_4
+Scores:
+320.0
+210.0
+320.0
+
+Individual 9 out of 12 (75%)
+gen_143_num_5
+Scores:
+330.0
+960.0
+950.0
+
+Individual 10 out of 12 (83%)
+gen_143_num_6
+Scores:
+940.0
+140.0
+220.0
+
+Individual 11 out of 12 (91%)
+gen_143_num_7
+Scores:
+250.0
+370.0
+210.0
+
+Individual 12 out of 12 (100%)
+gen_143_num_8
+Scores:
+60.0
+60.0
+60.0
+
+•••••••••••••••••••••••••••••••••••••••••••••••••••••••••••
+Creating Generation 144
+•••••••••••••••••••••••••••••••••••••••••••••••••••••••••••
+
+•••••••••••••••••••••••••••••••••••••••••••••••••••••••••••
+Running Generation 144, 72% done
+•••••••••••••••••••••••••••••••••••••••••••••••••••••••••••
+
+
+Individual 1 out of 12 (8%)
+gen_141_num_1
+Scores:
+970.0
+610.0
+570.0
+
+Individual 2 out of 12 (16%)
+gen_142_num_6
+Scores:
+970.0
+230.0
+370.0
+
+Individual 3 out of 12 (25%)
+gen_142_num_1
+Scores:
+970.0
+240.0
+970.0
+
+Individual 4 out of 12 (33%)
+gen_144_num_0
+Scores:
+210.0
+210.0
+210.0
+
+Individual 5 out of 12 (41%)
+gen_144_num_1
+Scores:
+970.0
+570.0
+970.0
+
+Individual 6 out of 12 (50%)
+gen_144_num_2
+Scores:
+380.0
+290.0
+90.0
+
+Individual 7 out of 12 (58%)
+gen_144_num_3
+Scores:
+210.0
+210.0
+210.0
+
+Individual 8 out of 12 (66%)
+gen_144_num_4
+Scores:
+130.0
+160.0
+230.0
+
+Individual 9 out of 12 (75%)
+gen_144_num_5
+Scores:
+100.0
+110.0
+100.0
+
+Individual 10 out of 12 (83%)
+gen_144_num_6
+Scores:
+60.0
+60.0
+60.0
+
+Individual 11 out of 12 (91%)
+gen_144_num_7
+Scores:
+230.0
+230.0
+230.0
+
+Individual 12 out of 12 (100%)
+gen_144_num_8
+Scores:
+910.0
+210.0
+590.0
+
+•••••••••••••••••••••••••••••••••••••••••••••••••••••••••••
+Creating Generation 145
+•••••••••••••••••••••••••••••••••••••••••••••••••••••••••••
+
+•••••••••••••••••••••••••••••••••••••••••••••••••••••••••••
+Running Generation 145, 72% done
+•••••••••••••••••••••••••••••••••••••••••••••••••••••••••••
+
+
+Individual 1 out of 12 (8%)
+gen_142_num_1
+Scores:
+990.0
+970.0
+970.0
+
+Individual 2 out of 12 (16%)
+gen_141_num_1
+Scores:
+360.0
+970.0
+960.0
+
+Individual 3 out of 12 (25%)
+gen_144_num_1
+Scores:
+380.0
+970.0
+970.0
+
+Individual 4 out of 12 (33%)
+gen_145_num_0
+Scores:
+980.0
+980.0
+130.0
+
+Individual 5 out of 12 (41%)
+gen_145_num_1
+Scores:
+580.0
+520.0
+330.0
+
+Individual 6 out of 12 (50%)
+gen_145_num_2
+Scores:
+980.0
+970.0
+970.0
+
+Individual 7 out of 12 (58%)
+gen_145_num_3
+Scores:
+170.0
+190.0
+460.0
+
+Individual 8 out of 12 (66%)
+gen_145_num_4
+Scores:
+80.0
+70.0
+70.0
+
+Individual 9 out of 12 (75%)
+gen_145_num_5
+Scores:
+160.0
+190.0
+190.0
+
+Individual 10 out of 12 (83%)
+gen_145_num_6
+Scores:
+300.0
+60.0
+290.0
+
+Individual 11 out of 12 (91%)
+gen_145_num_7
+Scores:
+380.0
+310.0
+280.0
+
+Individual 12 out of 12 (100%)
+gen_145_num_8
+Scores:
+210.0
+310.0
+510.0
+
+•••••••••••••••••••••••••••••••••••••••••••••••••••••••••••
+Creating Generation 146
+•••••••••••••••••••••••••••••••••••••••••••••••••••••••••••
+
+•••••••••••••••••••••••••••••••••••••••••••••••••••••••••••
+Running Generation 146, 73% done
+•••••••••••••••••••••••••••••••••••••••••••••••••••••••••••
+
+
+Individual 1 out of 12 (8%)
+gen_145_num_0
+Scores:
+520.0
+150.0
+490.0
+
+Individual 2 out of 12 (16%)
+gen_142_num_1
+Scores:
+570.0
+970.0
+970.0
+
+Individual 3 out of 12 (25%)
+gen_144_num_1
+Scores:
+570.0
+240.0
+270.0
+
+Individual 4 out of 12 (33%)
+gen_146_num_0
+Scores:
+970.0
+980.0
+970.0
+
+Individual 5 out of 12 (41%)
+gen_146_num_1
+Scores:
+270.0
+980.0
+580.0
+
+Individual 6 out of 12 (50%)
+gen_146_num_2
+Scores:
+570.0
+990.0
+970.0
+
+Individual 7 out of 12 (58%)
+gen_146_num_3
+Scores:
+220.0
+980.0
+3380.0
+
+Individual 8 out of 12 (66%)
+gen_146_num_4
+Scores:
+210.0
+210.0
+210.0
+
+Individual 9 out of 12 (75%)
+gen_146_num_5
+Scores:
+940.0
+240.0
+240.0
+
+Individual 10 out of 12 (83%)
+gen_146_num_6
+Scores:
+120.0
+210.0
+210.0
+
+Individual 11 out of 12 (91%)
+gen_146_num_7
+Scores:
+320.0
+320.0
+320.0
+
+Individual 12 out of 12 (100%)
+gen_146_num_8
+Scores:
+60.0
+60.0
+220.0
+
+•••••••••••••••••••••••••••••••••••••••••••••••••••••••••••
+Creating Generation 147
+•••••••••••••••••••••••••••••••••••••••••••••••••••••••••••
+
+•••••••••••••••••••••••••••••••••••••••••••••••••••••••••••
+Running Generation 147, 73% done
+•••••••••••••••••••••••••••••••••••••••••••••••••••••••••••
+
+
+Individual 1 out of 12 (8%)
+gen_146_num_3
+Scores:
+230.0
+^C
+Early termination
+
+Save models? (y or n) y
+
+Name of Directory: gen_147
+2020-01-29 15:04:17.305065: W tensorflow/python/util/util.cc:319] Sets are not currently considered sequences, but this may change in the future, so consider avoiding using them.
+WARNING:tensorflow:From /usr/local/lib/python3.7/site-packages/tensorflow_core/python/ops/resource_variable_ops.py:1786: calling BaseResourceVariable.__init__ (from tensorflow.python.ops.resource_variable_ops) with constraint is deprecated and will be removed in a future version.
+Instructions for updating:
+If using Keras pass *_constraint arguments to layers.
+harrison@Harrisons-MBP-4 ~/gamerAI $ python -i ms_pacman_neuro_evolve.py
+
+Hello Harrison. Hope you're having a nice Wednesday.
+Are you starting a new instance (n), continuing an old one (c), or debugging (d)?
+d
+
+Would you like to see the action? (y or n)
+y
+2020-01-29 15:05:20.252288: I tensorflow/core/platform/cpu_feature_guard.cc:142] Your CPU supports instructions that this TensorFlow binary was not compiled to use: AVX2 FMA
+2020-01-29 15:05:20.274604: I tensorflow/compiler/xla/service/service.cc:168] XLA service 0x7f8d590925c0 initialized for platform Host (this does not guarantee that XLA will be used). Devices:
+2020-01-29 15:05:20.274624: I tensorflow/compiler/xla/service/service.cc:176]   StreamExecutor device (0): Host, Default Version
+>>> pop = load('gen_14', 12)
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+  File "ms_pacman_neuro_evolve.py", line 345, in load
+    model_list.append(tf.keras.models.load_model("/Users/harrison/gamerAI/models/"+file_name+"/model_{}.tf".format(i)))
+  File "/usr/local/lib/python3.7/site-packages/tensorflow_core/python/keras/saving/save.py", line 149, in load_model
+    loader_impl.parse_saved_model(filepath)
+  File "/usr/local/lib/python3.7/site-packages/tensorflow_core/python/saved_model/loader_impl.py", line 83, in parse_saved_model
+    constants.SAVED_MODEL_FILENAME_PB))
+OSError: SavedModel file does not exist at: /Users/harrison/gamerAI/models/gen_14/model_0.tf/{saved_model.pbtxt|saved_model.pb}
+>>> pop = load('gen_147', 12)
+>>> run_generation(pop, 1, 1, True)
+
+Individual 1 out of 12 (8%)
+gen_146_num_3
+Scores:
+2020-01-29 15:05:56.643 Python[50309:18246766] ApplePersistenceIgnoreState: Existing state will not be touched. New state will be written to (null)
+1780.0
+
+Individual 2 out of 12 (16%)
+gen_146_num_2
+Scores:
+570.0
+
+Individual 3 out of 12 (25%)
+gen_142_num_1
+Scores:
+160.0
+
+Individual 4 out of 12 (33%)
+gen_147_num_0
+Scores:
+210.0
+
+Individual 5 out of 12 (41%)
+gen_147_num_1
+Scores:
+210.0
+
+Individual 6 out of 12 (50%)
+gen_147_num_2
+Scores:
+970.0
+
+Individual 7 out of 12 (58%)
+gen_147_num_3
+Scores:
+230.0
+
+Individual 8 out of 12 (66%)
+gen_147_num_4
+Scores:
+940.0
+
+Individual 9 out of 12 (75%)
+gen_147_num_5
+Scores:
+210.0
+
+Individual 10 out of 12 (83%)
+gen_147_num_6
+Scores:
+60.0
+
+Individual 11 out of 12 (91%)
+gen_147_num_7
+Scores:
+^CTraceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+  File "ms_pacman_neuro_evolve.py", line 94, in run_generation
+    rewards.append(runEpisode(env, person, render))
+  File "ms_pacman_neuro_evolve.py", line 74, in runEpisode
+    action = person.predict(cleanState(state))
+  File "/usr/local/lib/python3.7/site-packages/tensorflow_core/python/keras/engine/training.py", line 1013, in predict
+    use_multiprocessing=use_multiprocessing)
+  File "/usr/local/lib/python3.7/site-packages/tensorflow_core/python/keras/engine/training_v2.py", line 498, in predict
+    workers=workers, use_multiprocessing=use_multiprocessing, **kwargs)
+  File "/usr/local/lib/python3.7/site-packages/tensorflow_core/python/keras/engine/training_v2.py", line 426, in _model_iteration
+    use_multiprocessing=use_multiprocessing)
+  File "/usr/local/lib/python3.7/site-packages/tensorflow_core/python/keras/engine/training_v2.py", line 706, in _process_inputs
+    use_multiprocessing=use_multiprocessing)
+  File "/usr/local/lib/python3.7/site-packages/tensorflow_core/python/keras/engine/data_adapter.py", line 321, in __init__
+    indices_dataset = indices_dataset.map(permutation).prefetch(1)
+  File "/usr/local/lib/python3.7/site-packages/tensorflow_core/python/data/ops/dataset_ops.py", line 1588, in map
+    return MapDataset(self, map_func, preserve_cardinality=True)
+  File "/usr/local/lib/python3.7/site-packages/tensorflow_core/python/data/ops/dataset_ops.py", line 3888, in __init__
+    use_legacy_function=use_legacy_function)
+  File "/usr/local/lib/python3.7/site-packages/tensorflow_core/python/data/ops/dataset_ops.py", line 3147, in __init__
+    self._function = wrapper_fn._get_concrete_function_internal()
+  File "/usr/local/lib/python3.7/site-packages/tensorflow_core/python/eager/function.py", line 2395, in _get_concrete_function_internal
+    *args, **kwargs)
+  File "/usr/local/lib/python3.7/site-packages/tensorflow_core/python/eager/function.py", line 2389, in _get_concrete_function_internal_garbage_collected
+    graph_function, _, _ = self._maybe_define_function(args, kwargs)
+  File "/usr/local/lib/python3.7/site-packages/tensorflow_core/python/eager/function.py", line 2703, in _maybe_define_function
+    graph_function = self._create_graph_function(args, kwargs)
+  File "/usr/local/lib/python3.7/site-packages/tensorflow_core/python/eager/function.py", line 2593, in _create_graph_function
+    capture_by_value=self._capture_by_value),
+  File "/usr/local/lib/python3.7/site-packages/tensorflow_core/python/framework/func_graph.py", line 898, in func_graph_from_py_func
+    args, arg_names, flat_shapes=arg_shapes)
+  File "/usr/local/lib/python3.7/site-packages/tensorflow_core/python/framework/func_graph.py", line 1127, in _get_defun_inputs_from_args
+    args, names, structure=args, flat_shapes=flat_shapes)
+  File "/usr/local/lib/python3.7/site-packages/tensorflow_core/python/framework/func_graph.py", line 1217, in _get_defun_inputs
+    attr_value_pb2.AttrValue(s=compat.as_bytes(requested_name)))
+  File "/usr/local/lib/python3.7/site-packages/tensorflow_core/python/util/compat.py", line 82, in as_bytes
+    return bytes_or_text.encode(encoding)
+KeyboardInterrupt
+>>> exit()
+harrison@Harrisons-MBP-4 ~/gamerAI $                            [ruby-2.6.3p62]
+  [Restored Jan 29, 2020 at 7:05:30 PM]
+Last login: Wed Jan 29 19:05:27 on console
+harrison@Harrisons-MBP-4 ~/gamerAI $ python -i ms_pacman_neuro_evolve.py
+^CTraceback (most recent call last):
+  File "<frozen importlib._bootstrap_external>", line 87, in _path_is_mode_type
+  File "<frozen importlib._bootstrap_external>", line 81, in _path_stat
+FileNotFoundError: [Errno 2] No such file or directory: '/usr/local/lib/python3.7/site-packages/cffi/__init__.abi3.so'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "ms_pacman_neuro_evolve.py", line 3, in <module>
+    import tensorflow as tf
+  File "/usr/local/lib/python3.7/site-packages/tensorflow/__init__.py", line 101, in <module>
+    from tensorflow_core import *
+  File "/usr/local/lib/python3.7/site-packages/tensorflow_core/__init__.py", line 46, in <module>
+    from . _api.v2 import compat
+  File "/usr/local/lib/python3.7/site-packages/tensorflow_core/_api/v2/compat/__init__.py", line 39, in <module>
+    from . import v1
+  File "/usr/local/lib/python3.7/site-packages/tensorflow_core/_api/v2/compat/v1/__init__.py", line 32, in <module>
+    from . import compat
+  File "/usr/local/lib/python3.7/site-packages/tensorflow_core/_api/v2/compat/v1/compat/__init__.py", line 39, in <module>
+    from . import v1
+  File "/usr/local/lib/python3.7/site-packages/tensorflow_core/_api/v2/compat/v1/compat/v1/__init__.py", line 29, in <module>
+    from tensorflow._api.v2.compat.v1 import app
+  File "/usr/local/lib/python3.7/site-packages/tensorflow_core/_api/v2/compat/__init__.py", line 39, in <module>
+    from . import v1
+  File "/usr/local/lib/python3.7/site-packages/tensorflow_core/_api/v2/compat/v1/__init__.py", line 32, in <module>
+    from . import compat
+  File "/usr/local/lib/python3.7/site-packages/tensorflow_core/_api/v2/compat/v1/compat/__init__.py", line 39, in <module>
+    from . import v1
+  File "/usr/local/lib/python3.7/site-packages/tensorflow_core/_api/v2/compat/v1/compat/v1/__init__.py", line 675, in <module>
+    from tensorflow.python.keras.api._v1 import keras
+  File "/usr/local/lib/python3.7/site-packages/tensorflow_core/python/keras/api/__init__.py", line 10, in <module>
+    from . import keras
+  File "/usr/local/lib/python3.7/site-packages/tensorflow_core/python/keras/api/keras/__init__.py", line 29, in <module>
+    from . import preprocessing
+  File "/usr/local/lib/python3.7/site-packages/tensorflow_core/python/keras/api/keras/preprocessing/__init__.py", line 10, in <module>
+    from . import image
+  File "/usr/local/lib/python3.7/site-packages/tensorflow_core/python/keras/api/keras/preprocessing/image/__init__.py", line 11, in <module>
+    from tensorflow.python.keras.preprocessing.image import DirectoryIterator
+  File "/usr/local/lib/python3.7/site-packages/tensorflow_core/python/keras/preprocessing/image.py", line 23, in <module>
+    from keras_preprocessing import image
+  File "/usr/local/lib/python3.7/site-packages/keras_preprocessing/image/__init__.py", line 5, in <module>
+    from .affine_transformations import *
+  File "/usr/local/lib/python3.7/site-packages/keras_preprocessing/image/affine_transformations.py", line 9, in <module>
+    from .utils import (array_to_img,
+  File "/usr/local/lib/python3.7/site-packages/keras_preprocessing/image/utils.py", line 13, in <module>
+    from PIL import ImageEnhance
+  File "/usr/local/lib/python3.7/site-packages/PIL/ImageEnhance.py", line 21, in <module>
+    from . import Image, ImageFilter, ImageStat
+  File "/usr/local/lib/python3.7/site-packages/PIL/Image.py", line 99, in <module>
+    import cffi
+  File "<frozen importlib._bootstrap>", line 983, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 963, in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 906, in _find_spec
+  File "<frozen importlib._bootstrap_external>", line 1280, in find_spec
+  File "<frozen importlib._bootstrap_external>", line 1252, in _get_spec
+  File "<frozen importlib._bootstrap_external>", line 1383, in find_spec
+  File "<frozen importlib._bootstrap_external>", line 95, in _path_isfile
+  File "<frozen importlib._bootstrap_external>", line 87, in _path_is_mode_type
+KeyboardInterrupt
+>>> exit()
+harrison@Harrisons-MBP-4 ~/gamerAI $ python ms_pacman_neuro_evolve.py
+
+Hello Harrison. Hope you're having a nice Wednesday.
+Are you starting a new instance (n), continuing an old one (c), or debugging (d)?
+c
+
+Would you like to see the action? (y or n)
+n
+
+Name of directory of models: gen_147 
+
+How many models are being loaded? 14
+
+What generation is this? 147
+
+Let there be even more life!
+
+2020-01-29 20:10:17.818814: I tensorflow/core/platform/cpu_feature_guard.cc:142] Your CPU supports instructions that this TensorFlow binary was not compiled to use: AVX2 FMA
+2020-01-29 20:10:17.832525: I tensorflow/compiler/xla/service/service.cc:168] XLA service 0x7fd339be95b0 initialized for platform Host (this does not guarantee that XLA will be used). Devices:
+2020-01-29 20:10:17.832542: I tensorflow/compiler/xla/service/service.cc:176]   StreamExecutor device (0): Host, Default Version
+
+•••••••••••••••••••••••••••••••••••••••••••••••••••••••••••
+Running Generation 147, 73% done
+•••••••••••••••••••••••••••••••••••••••••••••••••••••••••••
+
+
+Individual 1 out of 14 (7%)
+gen_146_num_3
+Scores:
+220.0
+
+Individual 2 out of 14 (14%)
+gen_146_num_2
+Scores:
+970.0
+
+Individual 3 out of 14 (21%)
+gen_142_num_1
+Scores:
+970.0
+
+Individual 4 out of 14 (28%)
+gen_147_num_0
+Scores:
+210.0
+
+Individual 5 out of 14 (35%)
+gen_147_num_1
+Scores:
+220.0
+
+Individual 6 out of 14 (42%)
+gen_147_num_2
+Scores:
+980.0
+
+Individual 7 out of 14 (50%)
+gen_147_num_3
+Scores:
+220.0
+
+Individual 8 out of 14 (57%)
+gen_147_num_4
+Scores:
+450.0
+
+Individual 9 out of 14 (64%)
+gen_147_num_5
+Scores:
+210.0
+
+Individual 10 out of 14 (71%)
+gen_147_num_6
+Scores:
+60.0
+
+Individual 11 out of 14 (78%)
+gen_147_num_7
+Scores:
+530.0
+
+Individual 12 out of 14 (85%)
+gen_147_num_8
+Scores:
+220.0
+
+Individual 13 out of 14 (92%)
+gen_74_num_3
+Scores:
+890.0
+
+Individual 14 out of 14 (100%)
+gen_75_num_1
+Scores:
+120.0
+
+•••••••••••••••••••••••••••••••••••••••••••••••••••••••••••
+Creating Generation 148
+•••••••••••••••••••••••••••••••••••••••••••••••••••••••••••
+
+•••••••••••••••••••••••••••••••••••••••••••••••••••••••••••
+Running Generation 148, 74% done
+•••••••••••••••••••••••••••••••••••••••••••••••••••••••••••
+
+
+Individual 1 out of 10 (10%)
+gen_147_num_2
+Scores:
+980.0
+
+Individual 2 out of 10 (20%)
+gen_146_num_2
+Scores:
+970.0
+
+Individual 3 out of 10 (30%)
+gen_142_num_1
+Scores:
+970.0
+
+Individual 4 out of 10 (40%)
+gen_148_num_0
+Scores:
+970.0
+
+Individual 5 out of 10 (50%)
+gen_148_num_1
+Scores:
+960.0
+
+Individual 6 out of 10 (60%)
+gen_148_num_2
+Scores:
+980.0
+
+Individual 7 out of 10 (70%)
+gen_148_num_3
+Scores:
+950.0
+
+Individual 8 out of 10 (80%)
+gen_148_num_4
+Scores:
+990.0
+
+Individual 9 out of 10 (90%)
+gen_148_num_5
+Scores:
+980.0
+
+Individual 10 out of 10 (100%)
+gen_148_num_6
+Scores:
+970.0
+
+•••••••••••••••••••••••••••••••••••••••••••••••••••••••••••
+Creating Generation 149
+•••••••••••••••••••••••••••••••••••••••••••••••••••••••••••
+
+•••••••••••••••••••••••••••••••••••••••••••••••••••••••••••
+Running Generation 149, 74% done
+•••••••••••••••••••••••••••••••••••••••••••••••••••••••••••
+
+
+Individual 1 out of 10 (10%)
+gen_148_num_4
+Scores:
+570.0
+
+Individual 2 out of 10 (20%)
+gen_147_num_2
+Scores:
+980.0
+
+Individual 3 out of 10 (30%)
+gen_148_num_2
+Scores:
+980.0
+
+Individual 4 out of 10 (40%)
+gen_149_num_0
+Scores:
+990.0
+
+Individual 5 out of 10 (50%)
+gen_149_num_1
+Scores:
+970.0
+
+Individual 6 out of 10 (60%)
+gen_149_num_2
+Scores:
+970.0
+
+Individual 7 out of 10 (70%)
+gen_149_num_3
+Scores:
+960.0
+
+Individual 8 out of 10 (80%)
+gen_149_num_4
+Scores:
+970.0
+
+Individual 9 out of 10 (90%)
+gen_149_num_5
+Scores:
+970.0
+
+Individual 10 out of 10 (100%)
+gen_149_num_6
+Scores:
+990.0
+
+•••••••••••••••••••••••••••••••••••••••••••••••••••••••••••
+Creating Generation 150
+•••••••••••••••••••••••••••••••••••••••••••••••••••••••••••
+2020-01-29 20:30:12.735332: W tensorflow/python/util/util.cc:319] Sets are not currently considered sequences, but this may change in the future, so consider avoiding using them.
+WARNING:tensorflow:From /usr/local/lib/python3.7/site-packages/tensorflow_core/python/ops/resource_variable_ops.py:1786: calling BaseResourceVariable.__init__ (from tensorflow.python.ops.resource_variable_ops) with constraint is deprecated and will be removed in a future version.
+Instructions for updating:
+If using Keras pass *_constraint arguments to layers.
+
+•••••••••••••••••••••••••••••••••••••••••••••••••••••••••••
+Running Generation 150, 75% done
+•••••••••••••••••••••••••••••••••••••••••••••••••••••••••••
+
+
+Individual 1 out of 10 (10%)
+gen_149_num_0
+Scores:
+900.0
+
+Individual 2 out of 10 (20%)
+gen_149_num_6
+Scores:
+950.0
+
+Individual 3 out of 10 (30%)
+gen_147_num_2
+Scores:
+970.0
+
+Individual 4 out of 10 (40%)
+gen_150_num_0
+Scores:
+970.0
+
+Individual 5 out of 10 (50%)
+gen_150_num_1
+Scores:
+970.0
+
+Individual 6 out of 10 (60%)
+gen_150_num_2
+Scores:
+950.0
+
+Individual 7 out of 10 (70%)
+gen_150_num_3
+Scores:
+950.0
+
+Individual 8 out of 10 (80%)
+gen_150_num_4
+Scores:
+580.0
+
+Individual 9 out of 10 (90%)
+gen_150_num_5
+Scores:
+970.0
+
+Individual 10 out of 10 (100%)
+gen_150_num_6
+Scores:
+970.0
+
+•••••••••••••••••••••••••••••••••••••••••••••••••••••••••••
+Creating Generation 151
+•••••••••••••••••••••••••••••••••••••••••••••••••••••••••••
+
+•••••••••••••••••••••••••••••••••••••••••••••••••••••••••••
+Running Generation 151, 75% done
+•••••••••••••••••••••••••••••••••••••••••••••••••••••••••••
+
+
+Individual 1 out of 10 (10%)
+gen_147_num_2
+Scores:
+970.0
+
+Individual 2 out of 10 (20%)
+gen_150_num_0
+Scores:
+990.0
+
+Individual 3 out of 10 (30%)
+gen_150_num_1
+Scores:
+980.0
+
+Individual 4 out of 10 (40%)
+gen_151_num_0
+Scores:
+950.0
+
+Individual 5 out of 10 (50%)
+gen_151_num_1
+Scores:
+970.0
+
+Individual 6 out of 10 (60%)
+gen_151_num_2
+Scores:
+620.0
+
+Individual 7 out of 10 (70%)
+gen_151_num_3
+Scores:
+410.0
+
+Individual 8 out of 10 (80%)
+gen_151_num_4
+Scores:
+990.0
+
+Individual 9 out of 10 (90%)
+gen_151_num_5
+Scores:
+970.0
+
+Individual 10 out of 10 (100%)
+gen_151_num_6
+Scores:
+970.0
+
+•••••••••••••••••••••••••••••••••••••••••••••••••••••••••••
+Creating Generation 152
+•••••••••••••••••••••••••••••••••••••••••••••••••••••••••••
+
+•••••••••••••••••••••••••••••••••••••••••••••••••••••••••••
+Running Generation 152, 76% done
+•••••••••••••••••••••••••••••••••••••••••••••••••••••••••••
+
+
+Individual 1 out of 10 (10%)
+gen_150_num_0
+Scores:
+^C
+Early termination
+
+Save models? (y or n) n
+harrison@Harrisons-MBP-4 ~/gamerAI $ python ms_pacman_neuro_evolve.py
+
+Hello Harrison. Hope you're having a nice Wednesday.
+Are you starting a new instance (n), continuing an old one (c), or debugging (d)?
+c
+
+Would you like to see the action? (y or n)
+n
+
+Name of directory of models: checkpoint_150
+
+How many models are being loaded? 10
+
+What generation is this? 150
+
+Let there be even more life!
+
+2020-01-29 20:47:48.807082: I tensorflow/core/platform/cpu_feature_guard.cc:142] Your CPU supports instructions that this TensorFlow binary was not compiled to use: AVX2 FMA
+2020-01-29 20:47:48.821112: I tensorflow/compiler/xla/service/service.cc:168] XLA service 0x7f92ac4b79b0 initialized for platform Host (this does not guarantee that XLA will be used). Devices:
+2020-01-29 20:47:48.821130: I tensorflow/compiler/xla/service/service.cc:176]   StreamExecutor device (0): Host, Default Version
+
+•••••••••••••••••••••••••••••••••••••••••••••••••••••••••••
+Running Generation 150, 75% done
+•••••••••••••••••••••••••••••••••••••••••••••••••••••••••••
+
+
+Individual 1 out of 10 (10%)
+gen_149_num_0
+Scores:
+570.0
+
+Individual 2 out of 10 (20%)
+gen_149_num_6
+Scores:
+570.0
+
+Individual 3 out of 10 (30%)
+gen_147_num_2
+Scores:
+570.0
+
+Individual 4 out of 10 (40%)
+gen_150_num_0
+Scores:
+970.0
+
+Individual 5 out of 10 (50%)
+gen_150_num_1
+Scores:
+990.0
+
+Individual 6 out of 10 (60%)
+gen_150_num_2
+Scores:
+950.0
+
+Individual 7 out of 10 (70%)
+gen_150_num_3
+Scores:
+970.0
+
+Individual 8 out of 10 (80%)
+gen_150_num_4
+Scores:
+990.0
+
+Individual 9 out of 10 (90%)
+gen_150_num_5
+Scores:
+570.0
+
+Individual 10 out of 10 (100%)
+gen_150_num_6
+Scores:
+970.0
+
+•••••••••••••••••••••••••••••••••••••••••••••••••••••••••••
+Creating Generation 151
+•••••••••••••••••••••••••••••••••••••••••••••••••••••••••••
+
+•••••••••••••••••••••••••••••••••••••••••••••••••••••••••••
+Running Generation 151, 75% done
+•••••••••••••••••••••••••••••••••••••••••••••••••••••••••••
+
+
+Individual 1 out of 10 (10%)
+gen_150_num_1
+Scores:
+970.0
+
+Individual 2 out of 10 (20%)
+gen_150_num_4
+Scores:
+970.0
+
+Individual 3 out of 10 (30%)
+gen_150_num_0
+Scores:
+990.0
+
+Individual 4 out of 10 (40%)
+gen_151_num_0
+Scores:
+60.0
+
+Individual 5 out of 10 (50%)
+gen_151_num_1
+Scores:
+60.0
+
+Individual 6 out of 10 (60%)
+gen_151_num_2
+Scores:
+^C
+Early termination
+
+Save models? (y or n) n
+harrison@Harrisons-MBP-4 ~/gamerAI $ python ms_pacman_neuro_evolve.py
+
+Hello Harrison. Hope you're having a nice Wednesday.
+Are you starting a new instance (n), continuing an old one (c), or debugging (d)?
+c
+
+Would you like to see the action? (y or n)
+n            
+
+Name of directory of models: checkpoint_50
+
+How many models are being loaded? ^CTraceback (most recent call last):
+  File "ms_pacman_neuro_evolve.py", line 379, in <module>
+    num = input("\nHow many models are being loaded? ")
+KeyboardInterrupt
+harrison@Harrisons-MBP-4 ~/gamerAI $ python ms_pacman_neuro_evolve.py
+
+Hello Harrison. Hope you're having a nice Wednesday.
+Are you starting a new instance (n), continuing an old one (c), or debugging (d)?
+c
+
+Would you like to see the action? (y or n)
+n
+
+Name of directory of models: checkpoint_150
+
+How many models are being loaded? 10
+
+What generation is this? 150
+
+Let there be even more life!
+
+2020-01-29 20:59:30.358056: I tensorflow/core/platform/cpu_feature_guard.cc:142] Your CPU supports instructions that this TensorFlow binary was not compiled to use: AVX2 FMA
+2020-01-29 20:59:30.369660: I tensorflow/compiler/xla/service/service.cc:168] XLA service 0x7ff8b4c564f0 initialized for platform Host (this does not guarantee that XLA will be used). Devices:
+2020-01-29 20:59:30.369679: I tensorflow/compiler/xla/service/service.cc:176]   StreamExecutor device (0): Host, Default Version
+
+•••••••••••••••••••••••••••••••••••••••••••••••••••••••••••
+Running Generation 150, 75% done
+•••••••••••••••••••••••••••••••••••••••••••••••••••••••••••
+
+
+Individual 1 out of 10 (10%)
+gen_149_num_0
+Scores:
+970.0
+
+Individual 2 out of 10 (20%)
+gen_149_num_6
+Scores:
+400.0
+
+Individual 3 out of 10 (30%)
+gen_147_num_2
+Scores:
+570.0
+
+Individual 4 out of 10 (40%)
+gen_150_num_0
+Scores:
+980.0
+
+Individual 5 out of 10 (50%)
+gen_150_num_1
+Scores:
+570.0
+
+Individual 6 out of 10 (60%)
+gen_150_num_2
+Scores:
+970.0
+
+Individual 7 out of 10 (70%)
+gen_150_num_3
+Scores:
+980.0
+
+Individual 8 out of 10 (80%)
+gen_150_num_4
+Scores:
+950.0
+
+Individual 9 out of 10 (90%)
+gen_150_num_5
+Scores:
+970.0
+
+Individual 10 out of 10 (100%)
+gen_150_num_6
+Scores:
+960.0
+
+•••••••••••••••••••••••••••••••••••••••••••••••••••••••••••
+Creating Generation 151
+•••••••••••••••••••••••••••••••••••••••••••••••••••••••••••
+
+•••••••••••••••••••••••••••••••••••••••••••••••••••••••••••
+Running Generation 151, 75% done
+•••••••••••••••••••••••••••••••••••••••••••••••••••••••••••
+
+
+Individual 1 out of 10 (10%)
+gen_150_num_0
+Scores:
+950.0
+
+Individual 2 out of 10 (20%)
+gen_150_num_3
+Scores:
+520.0
+
+Individual 3 out of 10 (30%)
+gen_149_num_0
+Scores:
+990.0
+
+Individual 4 out of 10 (40%)
+gen_151_num_0
+Scores:
+60.0
+
+Individual 5 out of 10 (50%)
+gen_151_num_1
+Scores:
+150.0
+
+Individual 6 out of 10 (60%)
+gen_151_num_2
+Scores:
+210.0
+
+Individual 7 out of 10 (70%)
+gen_151_num_3
+Scores:
+210.0
+
+Individual 8 out of 10 (80%)
+gen_151_num_4
+Scores:
+60.0
+
+Individual 9 out of 10 (90%)
+gen_151_num_5
+Scores:
+60.0
+
+Individual 10 out of 10 (100%)
+gen_151_num_6
+Scores:
+60.0
+
+•••••••••••••••••••••••••••••••••••••••••••••••••••••••••••
+Creating Generation 152
+•••••••••••••••••••••••••••••••••••••••••••••••••••••••••••
+
+•••••••••••••••••••••••••••••••••••••••••••••••••••••••••••
+Running Generation 152, 76% done
+•••••••••••••••••••••••••••••••••••••••••••••••••••••••••••
+
+
+Individual 1 out of 10 (10%)
+gen_149_num_0
+Scores:
+970.0
+
+Individual 2 out of 10 (20%)
+gen_150_num_0
+Scores:
+970.0
+
+Individual 3 out of 10 (30%)
+gen_150_num_3
+Scores:
+570.0
+
+Individual 4 out of 10 (40%)
+gen_152_num_0
+Scores:
+90.0
+
+Individual 5 out of 10 (50%)
+gen_152_num_1
+Scores:
+60.0
+
+Individual 6 out of 10 (60%)
+gen_152_num_2
+Scores:
+60.0
+
+Individual 7 out of 10 (70%)
+gen_152_num_3
+Scores:
+210.0
+
+Individual 8 out of 10 (80%)
+gen_152_num_4
+Scores:
+60.0
+
+Individual 9 out of 10 (90%)
+gen_152_num_5
+Scores:
+60.0
+
+Individual 10 out of 10 (100%)
+gen_152_num_6
+Scores:
+90.0
+
+•••••••••••••••••••••••••••••••••••••••••••••••••••••••••••
+Creating Generation 153
+•••••••••••••••••••••••••••••••••••••••••••••••••••••••••••
+
+•••••••••••••••••••••••••••••••••••••••••••••••••••••••••••
+Running Generation 153, 76% done
+•••••••••••••••••••••••••••••••••••••••••••••••••••••••••••
+
+
+Individual 1 out of 10 (10%)
+gen_149_num_0
+Scores:
+980.0
+
+Individual 2 out of 10 (20%)
+gen_150_num_0
+Scores:
+970.0
+
+Individual 3 out of 10 (30%)
+gen_150_num_3
+Scores:
+570.0
+
+Individual 4 out of 10 (40%)
+gen_153_num_0
+Scores:
+240.0
+
+Individual 5 out of 10 (50%)
+gen_153_num_1
+Scores:
+120.0
+
+Individual 6 out of 10 (60%)
+gen_153_num_2
+Scores:
+90.0
+
+Individual 7 out of 10 (70%)
+gen_153_num_3
+Scores:
+210.0
+
+Individual 8 out of 10 (80%)
+gen_153_num_4
+Scores:
+410.0
+
+Individual 9 out of 10 (90%)
+gen_153_num_5
+Scores:
+620.0
+
+Individual 10 out of 10 (100%)
+gen_153_num_6
+Scores:
+60.0
+
+•••••••••••••••••••••••••••••••••••••••••••••••••••••••••••
+Creating Generation 154
+•••••••••••••••••••••••••••••••••••••••••••••••••••••••••••
+
+•••••••••••••••••••••••••••••••••••••••••••••••••••••••••••
+Running Generation 154, 77% done
+•••••••••••••••••••••••••••••••••••••••••••••••••••••••••••
+
+
+Individual 1 out of 10 (10%)
+gen_149_num_0
+Scores:
+970.0
+
+Individual 2 out of 10 (20%)
+gen_150_num_0
+Scores:
+980.0
+
+Individual 3 out of 10 (30%)
+gen_153_num_5
+Scores:
+1720.0
+
+Individual 4 out of 10 (40%)
+gen_154_num_0
+Scores:
+60.0
+
+Individual 5 out of 10 (50%)
+gen_154_num_1
+Scores:
+120.0
+
+Individual 6 out of 10 (60%)
+gen_154_num_2
+Scores:
+60.0
+
+Individual 7 out of 10 (70%)
+gen_154_num_3
+Scores:
+60.0
+
+Individual 8 out of 10 (80%)
+gen_154_num_4
+Scores:
+60.0
+
+Individual 9 out of 10 (90%)
+gen_154_num_5
+Scores:
+190.0
+
+Individual 10 out of 10 (100%)
+gen_154_num_6
+Scores:
+90.0
+
+•••••••••••••••••••••••••••••••••••••••••••••••••••••••••••
+Creating Generation 155
+•••••••••••••••••••••••••••••••••••••••••••••••••••••••••••
+
+•••••••••••••••••••••••••••••••••••••••••••••••••••••••••••
+Running Generation 155, 77% done
+•••••••••••••••••••••••••••••••••••••••••••••••••••••••••••
+
+
+Individual 1 out of 10 (10%)
+gen_153_num_5
+Scores:
+340.0
+
+Individual 2 out of 10 (20%)
+gen_150_num_0
+Scores:
+570.0
+
+Individual 3 out of 10 (30%)
+gen_149_num_0
+Scores:
+970.0
+
+Individual 4 out of 10 (40%)
+gen_155_num_0
+Scores:
+90.0
+
+Individual 5 out of 10 (50%)
+gen_155_num_1
+Scores:
+300.0
+
+Individual 6 out of 10 (60%)
+gen_155_num_2
+Scores:
+60.0
+
+Individual 7 out of 10 (70%)
+gen_155_num_3
+Scores:
+130.0
+
+Individual 8 out of 10 (80%)
+gen_155_num_4
+Scores:
+60.0
+
+Individual 9 out of 10 (90%)
+gen_155_num_5
+Scores:
+90.0
+
+Individual 10 out of 10 (100%)
+gen_155_num_6
+Scores:
+90.0
+
+•••••••••••••••••••••••••••••••••••••••••••••••••••••••••••
+Creating Generation 156
+•••••••••••••••••••••••••••••••••••••••••••••••••••••••••••
+
+•••••••••••••••••••••••••••••••••••••••••••••••••••••••••••
+Running Generation 156, 78% done
+•••••••••••••••••••••••••••••••••••••••••••••••••••••••••••
+
+
+Individual 1 out of 10 (10%)
+gen_149_num_0
+Scores:
+950.0
+
+Individual 2 out of 10 (20%)
+gen_150_num_0
+Scores:
+970.0
+
+Individual 3 out of 10 (30%)
+gen_153_num_5
+Scores:
+1720.0
+
+Individual 4 out of 10 (40%)
+gen_156_num_0
+Scores:
+60.0
+
+Individual 5 out of 10 (50%)
+gen_156_num_1
+Scores:
+60.0
+
+Individual 6 out of 10 (60%)
+gen_156_num_2
+Scores:
+60.0
+
+Individual 7 out of 10 (70%)
+gen_156_num_3
+Scores:
+60.0
+
+Individual 8 out of 10 (80%)
+gen_156_num_4
+Scores:
+60.0
+
+Individual 9 out of 10 (90%)
+gen_156_num_5
+Scores:
+90.0
+
+Individual 10 out of 10 (100%)
+gen_156_num_6
+Scores:
+60.0
+
+•••••••••••••••••••••••••••••••••••••••••••••••••••••••••••
+Creating Generation 157
+•••••••••••••••••••••••••••••••••••••••••••••••••••••••••••
+
+•••••••••••••••••••••••••••••••••••••••••••••••••••••••••••
+Running Generation 157, 78% done
+•••••••••••••••••••••••••••••••••••••••••••••••••••••••••••
+
+
+Individual 1 out of 10 (10%)
+gen_153_num_5
+Scores:
+440.0
+
+Individual 2 out of 10 (20%)
+gen_150_num_0
+Scores:
+970.0
+
+Individual 3 out of 10 (30%)
+gen_149_num_0
+Scores:
+980.0
+
+Individual 4 out of 10 (40%)
+gen_157_num_0
+Scores:
+170.0
+
+Individual 5 out of 10 (50%)
+gen_157_num_1
+Scores:
+90.0
+
+Individual 6 out of 10 (60%)
+gen_157_num_2
+Scores:
+210.0
+
+Individual 7 out of 10 (70%)
+gen_157_num_3
+Scores:
+410.0
+
+Individual 8 out of 10 (80%)
+gen_157_num_4
+Scores:
+60.0
+
+Individual 9 out of 10 (90%)
+gen_157_num_5
+Scores:
+90.0
+
+Individual 10 out of 10 (100%)
+gen_157_num_6
+Scores:
+60.0
+
+•••••••••••••••••••••••••••••••••••••••••••••••••••••••••••
+Creating Generation 158
+•••••••••••••••••••••••••••••••••••••••••••••••••••••••••••
+
+•••••••••••••••••••••••••••••••••••••••••••••••••••••••••••
+Running Generation 158, 79% done
+•••••••••••••••••••••••••••••••••••••••••••••••••••••••••••
+
+
+Individual 1 out of 10 (10%)
+gen_149_num_0
+Scores:
+980.0
+
+Individual 2 out of 10 (20%)
+gen_150_num_0
+Scores:
+210.0
+
+Individual 3 out of 10 (30%)
+gen_153_num_5
+Scores:
+1140.0
+
+Individual 4 out of 10 (40%)
+gen_158_num_0
+Scores:
+70.0
+
+Individual 5 out of 10 (50%)
+gen_158_num_1
+Scores:
+250.0
+
+Individual 6 out of 10 (60%)
+gen_158_num_2
+Scores:
+90.0
+
+Individual 7 out of 10 (70%)
+gen_158_num_3
+Scores:
+170.0
+
+Individual 8 out of 10 (80%)
+gen_158_num_4
+Scores:
+60.0
+
+Individual 9 out of 10 (90%)
+gen_158_num_5
+Scores:
+90.0
+
+Individual 10 out of 10 (100%)
+gen_158_num_6
+Scores:
+60.0
+
+•••••••••••••••••••••••••••••••••••••••••••••••••••••••••••
+Creating Generation 159
+•••••••••••••••••••••••••••••••••••••••••••••••••••••••••••
+
+•••••••••••••••••••••••••••••••••••••••••••••••••••••••••••
+Running Generation 159, 79% done
+•••••••••••••••••••••••••••••••••••••••••••••••••••••••••••
+
+
+Individual 1 out of 10 (10%)
+gen_153_num_5
+Scores:
+380.0
+
+Individual 2 out of 10 (20%)
+gen_149_num_0
+Scores:
+570.0
+
+Individual 3 out of 10 (30%)
+gen_158_num_1
+Scores:
+320.0
+
+Individual 4 out of 10 (40%)
+gen_159_num_0
+Scores:
+240.0
+
+Individual 5 out of 10 (50%)
+gen_159_num_1
+Scores:
+260.0
+
+Individual 6 out of 10 (60%)
+gen_159_num_2
+Scores:
+90.0
+
+Individual 7 out of 10 (70%)
+gen_159_num_3
+Scores:
+60.0
+
+Individual 8 out of 10 (80%)
+gen_159_num_4
+Scores:
+80.0
+
+Individual 9 out of 10 (90%)
+gen_159_num_5
+Scores:
+90.0
+
+Individual 10 out of 10 (100%)
+gen_159_num_6
+Scores:
+60.0
+
+•••••••••••••••••••••••••••••••••••••••••••••••••••••••••••
+Creating Generation 160
+•••••••••••••••••••••••••••••••••••••••••••••••••••••••••••
+
+•••••••••••••••••••••••••••••••••••••••••••••••••••••••••••
+Running Generation 160, 80% done
+•••••••••••••••••••••••••••••••••••••••••••••••••••••••••••
+
+
+Individual 1 out of 10 (10%)
+gen_149_num_0
+Scores:
+550.0
+
+Individual 2 out of 10 (20%)
+gen_153_num_5
+Scores:
+320.0
+
+Individual 3 out of 10 (30%)
+gen_158_num_1
+Scores:
+140.0
+
+Individual 4 out of 10 (40%)
+gen_160_num_0
+Scores:
+60.0
+
+Individual 5 out of 10 (50%)
+gen_160_num_1
+Scores:
+120.0
+
+Individual 6 out of 10 (60%)
+gen_160_num_2
+Scores:
+210.0
+
+Individual 7 out of 10 (70%)
+gen_160_num_3
+Scores:
+90.0
+
+Individual 8 out of 10 (80%)
+gen_160_num_4
+Scores:
+90.0
+
+Individual 9 out of 10 (90%)
+gen_160_num_5
+Scores:
+60.0
+
+Individual 10 out of 10 (100%)
+gen_160_num_6
+Scores:
+200.0
+
+•••••••••••••••••••••••••••••••••••••••••••••••••••••••••••
+Creating Generation 161
+•••••••••••••••••••••••••••••••••••••••••••••••••••••••••••
+
+•••••••••••••••••••••••••••••••••••••••••••••••••••••••••••
+Running Generation 161, 80% done
+•••••••••••••••••••••••••••••••••••••••••••••••••••••••••••
+
+
+Individual 1 out of 10 (10%)
+gen_149_num_0
+Scores:
+980.0
+
+Individual 2 out of 10 (20%)
+gen_153_num_5
+Scores:
+1720.0
+
+Individual 3 out of 10 (30%)
+gen_160_num_2
+Scores:
+210.0
+
+Individual 4 out of 10 (40%)
+gen_161_num_0
+Scores:
+60.0
+
+Individual 5 out of 10 (50%)
+gen_161_num_1
+Scores:
+^C
+Early termination
+
+Save models? (y or n) n
+harrison@Harrisons-MBP-4 ~/gamerAI $                            [ruby-2.6.3p62]

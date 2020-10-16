@@ -1,2 +1,2 @@
 # Ms-Pacman-Neuroevolution
-A side project to try and use a neuroevolution algorithm to create a CNN that plays Ms Pacman
+An old side project to use a neuroevolution algorithm to create a CNN that plays Ms Pacman and familarize myself with tensorflow
